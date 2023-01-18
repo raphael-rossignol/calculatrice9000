@@ -3,10 +3,10 @@ from tkinter import *
 # Global Layout
 
 root = Tk()
-root.geometry("258x480")
+root.geometry('258x480')
 root.configure(bg='gray15')
-root.title("Calculatrice9000")
-expression = ""
+root.title('Calculatrice9000')
+expression = ''
 equation = StringVar()
 expression_field = Entry(root, textvariable=equation, bg='gray40', font=10)
 expression_field.grid(columnspan=4, ipadx=17, ipady=12)
@@ -15,28 +15,35 @@ expression_field.grid(columnspan=4, ipadx=17, ipady=12)
 # Operator label
 
 label_equal = Button(text='=', width=5, height=3, font=10, bg='dark orange', command=lambda: button_equal())
-label_plus = Button(text='+', width=5, height=3, font=10, bg='gray25', command=lambda: button_click("+"))
-label_minus = Button(text='-', width=5, height=3, font=10, bg='gray25', command=lambda: button_click("-"))
-label_divide = Button(text='/', width=5, height=3, font=10, bg='gray25', command=lambda: button_click("/"))
-label_multiply = Button(text='x', width=5, height=3, font=10, bg='gray25', command=lambda: button_click("*"))
+root.bind('<Return>', lambda event: button_equal())
+label_plus = Button(text='+', width=5, height=3, font=10, bg='gray25', command=lambda: button_click('+'))
+root.bind('+', lambda event: button_click('+'))
+label_minus = Button(text='-', width=5, height=3, font=10, bg='gray25', command=lambda: button_click('-'))
+root.bind('-', lambda event: button_click('-'))
+label_divide = Button(text='/', width=5, height=3, font=10, bg='gray25', command=lambda: button_click('/'))
+root.bind('/', lambda event: button_click('/'))
+label_multiply = Button(text='x', width=5, height=3, font=10, bg='gray25', command=lambda: button_click('*'))
+root.bind('*', lambda event: button_click('*'))
 label_clear = Button(text='C', width=5, height=3, font=10, bg='gray25', command=lambda: button_clear())
-label_dot = Button(text='.', width=5, height=3, font=10, bg='gray25', command=lambda: button_click("."))
+label_dot = Button(text='.', width=5, height=3, font=10, bg='gray25', command=lambda: button_click('.'))
+root.bind('.', lambda event: button_click('.'))
 label_square = Button(text='²', width=5, height=3, font=10, bg='gray25', command=lambda: button_square())
-label_percentage = Button(text='%', width=5, height=3, font=10, bg='gray25', command=lambda: button_click("//"))
+label_percentage = Button(text='%', width=5, height=3, font=10, bg='gray25', command=lambda: button_click('//'))
 label_squareroot = Button(text='√x', width=5, height=3, font=10, bg='gray25', command=lambda: button_squareroot())
+
 
 
 # Number label and layout
 
 def labelnum():
     i = 1
-    btns = []
     for j in range(3, 6):
         for k in range(3):
-            btns.append(Button(command=lambda i=i: button_click(i), text=i, height=3, width=5, font=10).grid(row=[j], column=[k]))
+            Button(command=lambda i=i: button_click(i), text=i, height=3, width=5, font=10).grid(row=[j], column=[k])
+            root.bind(i, lambda event, i=i: button_click(i))
             i += 1
 
-    Button(command=lambda : button_click(0), text="0", height=3, width=5, font=10).grid(row=6, column=1)
+    Button(command=lambda: button_click(0), text='0', height=3, width=5, font=10).grid(row=6, column=1)
 
 labelnum()
 
@@ -81,8 +88,8 @@ def button_square():
 
 def button_clear():
     global expression
-    expression = ""
-    equation.set("")
+    expression = ''
+    equation.set('')
 
 
 def button_equal():
@@ -90,11 +97,11 @@ def button_equal():
         global expression
         total = str(eval(expression))
         equation.set(total)
-        expression = ""
+        expression = total
 
     except:
         equation.set('error')
-        expression = ""
+        expression = ''
 
 
 root.mainloop()
