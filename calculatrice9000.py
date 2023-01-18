@@ -63,12 +63,15 @@ def button_click(number):
     equation.set(expression)
 
 
-# Button for the ² operator
+# Button for the "sqrt" operator
 
 def button_squareroot():
     global expression
     expression = str(float(equation.get())**0.5)
     equation.set(expression)
+
+
+# Button for the ² operator
 
 def button_square():
     global expression
