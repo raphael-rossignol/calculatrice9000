@@ -23,7 +23,7 @@ label_clear = Button(text='C', width=5, height=3, font=10, bg='gray25', command=
 label_dot = Button(text='.', width=5, height=3, font=10, bg='gray25', command=lambda: button_click("."))
 label_square = Button(text='²', width=5, height=3, font=10, bg='gray25', command=lambda: button_click("**"))
 label_percentage = Button(text='%', width=5, height=3, font=10, bg='gray25', command=lambda: button_click("//"))
-label_squareroot = Button(text='√x', width=5, height=3, font=10, bg='gray25', command=lambda: button_click2())
+label_squareroot = Button(text='√x', width=5, height=3, font=10, bg='gray25', command=lambda: button_squareroot())
 
 
 # Number label and layout
@@ -65,7 +65,7 @@ def button_click(number):
 
 # Button for the ² operator
 
-def button_click2():
+def button_squareroot():
     global expression
     expression = str(float(equation.get())**0.5)
     equation.set(expression)
